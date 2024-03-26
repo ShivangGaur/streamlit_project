@@ -3,4 +3,10 @@ huggingface_hub
 openai
 transformers
 gradio
-gensim
+gensimstreamlit
+google-generativeai
+python-dotenv
+PyPDF2
+chromadb
+faiss-cpu
+langchain_google_genai
