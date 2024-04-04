@@ -10,3 +10,8 @@ PyPDF2
 chromadb
 faiss-cpu
 langchain_google_genai
+from nltk.tokenize import sent_tokenize
+from nltk.corpus import stopwords
+from nltk.probability import FreqDist
+from heapq import nlargest
+import nltk
