@@ -2,8 +2,6 @@ langchain
 huggingface_hub
 openai
 transformers
-gradio
-gensimstreamlit
 google-generativeai
 python-dotenv
 PyPDF2
