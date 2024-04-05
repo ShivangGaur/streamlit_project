@@ -20,6 +20,7 @@ from nltk.probability import FreqDist
 from heapq import nlargest
 
 nltk.download('punkt')
+nltk.download('stopwords')
 
 load_dotenv()
 os.getenv("GOOGLE_API_KEY")
