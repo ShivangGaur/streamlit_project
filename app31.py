@@ -141,9 +141,9 @@ def main():
                 get_vector_store(text_chunks)
                 st.success("Done")
 
-     raw_text = read_pdf(pdf_docs)
-     summary = summarize_pdf(raw_text)
-     st.write("Summary:", summary)
+    raw_text = read_pdf(pdf_docs)
+    summary = summarize_pdf(raw_text)
+    st.write("Summary:", summary)
 
 
 if __name__ == "__main__":
