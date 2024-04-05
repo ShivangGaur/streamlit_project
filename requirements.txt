@@ -4,6 +4,7 @@ openai
 transformers
 google-generativeai
 python-dotenv
+torch
 PyPDF2
 chromadb
 faiss-cpu
