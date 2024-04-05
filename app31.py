@@ -19,6 +19,8 @@ from nltk.corpus import stopwords
 from nltk.probability import FreqDist
 from heapq import nlargest
 
+nltk.download('punkt')
+
 load_dotenv()
 os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
