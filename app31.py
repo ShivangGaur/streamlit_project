@@ -136,7 +136,7 @@ def main():
         if st.button("Submit & Process"):
             with st.spinner("Processing..."):
                 raw_text = read_pdf(pdf_docs)
-                summary = summarize_pdf(raw_text)
+                summary = summarize_pdf(raw_text,5)
                 text_chunks = get_text_chunks(raw_text)
                 get_vector_store(text_chunks)
                 st.success("Done")
