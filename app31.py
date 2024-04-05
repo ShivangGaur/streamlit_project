@@ -49,7 +49,7 @@ def read_pdf(uploaded_file):
 
     return text
 
-def summarize_pdf(text, num_sentences=5):
+def summarize_pdf(text):
     # Tokenize the text into sentences
     sentences = sent_tokenize(text)
     
@@ -71,7 +71,7 @@ def summarize_pdf(text, num_sentences=5):
                     ranking[i] = freq_dist[word]
 
     # Get top sentences
-    top_sentences = nlargest(num_sentences, ranking, key=ranking.get)
+    top_sentences = nlargest(ranking, key=ranking.get)
     summary = [sentences[j] for j in sorted(top_sentences)]
 
     return ' '.join(summary)
@@ -136,7 +136,7 @@ def main():
         if st.button("Submit & Process"):
             with st.spinner("Processing..."):
                 raw_text = read_pdf(pdf_docs)
-                summary = summarize_pdf(raw_text,5)
+                summary = summarize_pdf(raw_text)
                 text_chunks = get_text_chunks(raw_text)
                 get_vector_store(text_chunks)
                 st.success("Done")
