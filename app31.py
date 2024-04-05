@@ -130,16 +130,16 @@ def main():
         user_input(user_question)
 
    
-    with st.sidebar:
-        st.title("Menu:")
-        pdf_docs =  st.file_uploader("Upload a PDF file", type=["pdf"])
-        if st.button("Submit & Process"):
-            with st.spinner("Processing..."):
-                raw_text = read_pdf(pdf_docs)
-                summary = summarize_pdf(raw_text)
-                text_chunks = get_text_chunks(raw_text)
-                get_vector_store(text_chunks)
-                st.success("Done")
+    
+    st.title("Menu:")
+    pdf_docs =  st.file_uploader("Upload a PDF file", type=["pdf"])
+    if st.button("Submit & Process"):
+        with st.spinner("Processing..."):
+            raw_text = read_pdf(pdf_docs)
+            summary = summarize_pdf(raw_text)
+            text_chunks = get_text_chunks(raw_text)
+            get_vector_store(text_chunks)
+            st.success("Done")
 
 
     st.write("Summary:", summary)
