@@ -74,7 +74,7 @@ def summarize_pdf(text,num_sentences=5):
     top_sentences = nlargest(5,ranking, key=ranking.get)
     summary = [sentences[j] for j in sorted(top_sentences)]
 
-    return ' '.join(summary)
+    return summary
 
 def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
