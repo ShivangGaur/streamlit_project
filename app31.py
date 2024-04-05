@@ -71,7 +71,7 @@ def summarize_pdf(text,num_sentences=5):
                     ranking[i] = freq_dist[word]
 
     # Get top sentences
-    top_sentences = nlargest(num_sentences=5,ranking, key=ranking.get)
+    top_sentences = nlargest(5,ranking, key=ranking.get)
     summary = [sentences[j] for j in sorted(top_sentences)]
 
     return ' '.join(summary)
