@@ -142,7 +142,8 @@ def main():
 
 
     raw_text = read_pdf(pdf_docs)
-    summary = summarize_pdf(raw_text)
+    text_chunks = get_text_chunks(raw_text)
+    summary = summarize_pdf(text_chunks)
     st.write("Summary:", summary)
 
 
