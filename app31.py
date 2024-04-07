@@ -128,12 +128,7 @@ def main():
 
     if user_question:
         user_input(user_question)
-
-    raw_text = read_pdf(pdf_docs)
-    summary = summarize_pdf(raw_text)
-    st.write("Summary:", summary)
-   
-    
+     
     st.title("Menu:")
     pdf_docs =  st.file_uploader("Upload a PDF file", type=["pdf"])
     if st.button("Submit & Process"):
@@ -142,6 +137,9 @@ def main():
             text_chunks = get_text_chunks(raw_text)
             get_vector_store(text_chunks)
             st.success("Done")
+            raw_text = read_pdf(pdf_docs)
+            summary = summarize_pdf(raw_text)
+            st.write("Summary:", summary)
 
 
     raw_text = read_pdf(pdf_docs)
