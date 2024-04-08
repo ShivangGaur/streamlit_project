@@ -112,17 +112,6 @@ def main():
     st.set_page_config("Chat PDF")
     st.header("Chat with PDF using Gemini💁")
 
-    user_question = st.text_input("Ask a Question from the PDF Files")
-    if user_question!='Summary' and user_question!='summary':
-        user_input(user_question)
-
-    elif user_question=='Summary' or user_question=='summary':
-        with st.spinner("Summarizing text..."):
-            summary = summarize_pdf(pdf_text)
-
-        st.header("Summary:")
-        st.write(summary)
-
     with st.sidebar:
         st.title("Menu:")
         pdf_docs =  st.file_uploader("Upload a PDF file", type=["pdf"])
@@ -138,7 +127,17 @@ def main():
                     if page_text:
                         pdf_text += page_text
                 st.success("Done")
-  
+
+    user_question = st.text_input("Ask a Question from the PDF Files")
+    if user_question!='Summary' and user_question!='summary':
+        user_input(user_question)
+
+    elif user_question=='Summary' or user_question=='summary':
+        with st.spinner("Summarizing text..."):
+            summary = summarize_pdf(pdf_text)
+
+        st.header("Summary:")
+        st.write(summary)
 
 if __name__ == "__main__":
     main()
