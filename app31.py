@@ -46,7 +46,7 @@ def read_pdf(uploaded_file):
     return text
 
 def get_text_chunks(text):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
     chunks = text_splitter.split_text(text)
     return chunks
 
@@ -79,7 +79,7 @@ def get_conversational_chain():
 def summarize_pdf(text):
     llm = ChatGoogleGenerativeAI(temperature=0.3, model="gemini-pro")
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=20)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=10)
     chunks = text_splitter.create_documents([text])
 
     chain = load_summarize_chain(
@@ -106,13 +106,22 @@ def user_input(user_question):
     print(response)
     st.write("Reply: ", response["output_text"])
 
-    
+  
 
 def main():
     st.set_page_config("Chat PDF")
     st.header("Chat with PDF using Gemini💁")
 
     user_question = st.text_input("Ask a Question from the PDF Files")
+    if user_question!='Summary' and user_question!='summary':
+        user_input(user_question)
+
+    elif user_question=='Summary' or user_question=='summary':
+        with st.spinner("Summarizing text..."):
+            summary = summarize_pdf(pdf_text)
+
+        st.header("Summary:")
+        st.write(summary)
 
     with st.sidebar:
         st.title("Menu:")
@@ -129,16 +138,7 @@ def main():
                     if page_text:
                         pdf_text += page_text
                 st.success("Done")
-
-    if user_question!='Summary' and user_question!='summary':
-        user_input(user_question)
-
-    elif user_question=='Summary' or user_question=='summary':
-        with st.spinner("Summarizing text..."):
-            summary = summarize_pdf(pdf_text)
-
-        st.header("Summary:")
-        st.write(summary)
+  
 
 if __name__ == "__main__":
     main()
