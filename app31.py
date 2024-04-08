@@ -1,37 +1,29 @@
 import streamlit as st
-import fitz  # PyMuPDF
-from nltk.tokenize import sent_tokenize
-from nltk.corpus import stopwords
-from nltk.probability import FreqDist
-from heapq import nlargest
+import os
+from langchain import PromptTemplate
+from langchain.chat_models import ChatOpenAI
+from langchain.chains.summarize import load_summarize_chain
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_google_genai import ChatGoogleGenerativeAI
+from PyPDF2 import PdfReader
 
-# Function to summarize text using TF-IDF algorithm
-def summarize_text(text, num_sentences=5):
-    # Tokenize the text into sentences
-    sentences = sent_tokenize(text)
-    
-    # Remove stopwords
-    stop_words = set(stopwords.words('english'))
-    words = [word for word in sentences if word.lower() not in stop_words]
-    
-    # Compute word frequency
-    freq_dist = FreqDist(words)
-    
-    # Rank sentences based on word frequency
-    ranking = {}
-    for i, sentence in enumerate(sentences):
-        for word in nltk.word_tokenize(sentence.lower()):
-            if word in freq_dist:
-                if i in ranking:
-                    ranking[i] += freq_dist[word]
-                else:
-                    ranking[i] = freq_dist[word]
+# Set Google API Key environment variable
+os.environ["GOOGLE_API_KEY"] = "AIzaSyBMUY-nRzN0LNS1SToVGe4orj3MDmFmG3U"
 
-    # Get top sentences
-    top_sentences = nlargest(num_sentences, ranking, key=ranking.get)
-    summary = [sentences[j] for j in sorted(top_sentences)]
+# Function to summarize text from PDF using langchain
+def summarize_pdf(text):
+    llm = ChatGoogleGenerativeAI(temperature=0.3, model="gemini-pro")
 
-    return ' '.join(summary)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=20)
+    chunks = text_splitter.create_documents([text])
+
+    chain = load_summarize_chain(
+        llm,
+        chain_type='map_reduce',
+        verbose=False
+    )
+    summary = chain.run(chunks)
+    return summary
 
 # Streamlit UI
 def main():
@@ -43,14 +35,16 @@ def main():
     if uploaded_file is not None:
         # Read the PDF file
         pdf_text = ""
-        with st.spinner("Extracting text..."):
-            doc = fitz.open(uploaded_file)
-            for page in doc:
-                pdf_text += page.get_text()
+        with st.spinner("Extracting text from PDF..."):
+            pdf_reader = PdfReader(uploaded_file)
+            for page in pdf_reader.pages:
+                page_text = page.extract_text()
+                if page_text:
+                    pdf_text += page_text
 
         # Summarize the text
         with st.spinner("Summarizing text..."):
-            summary = summarize_text(pdf_text)
+            summary = summarize_pdf(pdf_text)
 
         # Display the summary
         st.header("Summary:")
