@@ -130,7 +130,7 @@ def main():
                         pdf_text += page_text
                 st.success("Done")
 
-    if user_question!='Summary' or user_question!='summary':
+    if user_question!='Summary' and user_question!='summary':
         user_input(user_question)
 
     elif user_question=='Summary' or user_question=='summary':
