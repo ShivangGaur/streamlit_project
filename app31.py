@@ -79,7 +79,7 @@ def get_conversational_chain():
 def summarize_pdf(text):
     llm = ChatGoogleGenerativeAI(temperature=0.3, model="gemini-pro")
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=10)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
     chunks = text_splitter.create_documents([text])
 
     chain = load_summarize_chain(
