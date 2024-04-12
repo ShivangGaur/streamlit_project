@@ -13,4 +13,4 @@ nltk
 tensorflow
 fitz
 frontend
-static
+static/
