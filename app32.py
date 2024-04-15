@@ -14,7 +14,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains.summarize import load_summarize_chain
 from dotenv import load_dotenv
 import tensorflow
-import fitz
+
 
 from langchain.chains import LLMChain
 from langchain import PromptTemplate
