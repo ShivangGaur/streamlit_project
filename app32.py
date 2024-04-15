@@ -111,19 +111,19 @@ def summarize_long_pdf(text):
     summary = chain.run(chunks)
     return summary
 
-def summarize_short_pdf(text, language):
-    generic_template = '''
-    Write a summary of the following pdf_docs:
-    Speech : `{pdf_docs}`
-    Translate the precise summary to {language}.
-    '''
-    prompt = PromptTemplate(input_variables=['pdf_docs', 'language'], template=generic_template)
-    complete_prompt = prompt.format(pdf_docs=text, language=language.lower())
+# def summarize_short_pdf(text, language):
+#     generic_template = '''
+#     Write a summary of the following pdf_docs:
+#     Speech : `{pdf_docs}`
+#     Translate the precise summary to {language}.
+#     '''
+#     prompt = PromptTemplate(input_variables=['pdf_docs', 'language'], template=generic_template)
+#     complete_prompt = prompt.format(pdf_docs=text, language=language.lower())
 
-    llm = ChatGoogleGenerativeAI(model="gemini-pro")
-    llm_chain = LLMChain(llm=llm, prompt=prompt)
-    summary = llm_chain.run({'pdf_docs': text, 'language': language.lower()})
-    return summary
+#     llm = ChatGoogleGenerativeAI(model="gemini-pro")
+#     llm_chain = LLMChain(llm=llm, prompt=prompt)
+#     summary = llm_chain.run({'pdf_docs': text, 'language': language.lower()})
+#     return summary
 
 def user_input(user_question):
     embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
