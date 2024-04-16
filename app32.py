@@ -176,7 +176,7 @@ def main():
             # if count_words_in_pdf() > 3000:
             summary_1 = summarize_long_pdf(pdf_text)
             # else:
-            summary_2 = summarize_short_pdf(pdf_text)
+            summary_2 = summarize_short_pdf(pdf_text,'english')
 
     st.header("Summary_long:")
     st.write(summary_1)
