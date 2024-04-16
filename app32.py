@@ -23,28 +23,28 @@ load_dotenv()
 os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-# def read_pdf(uploaded_file):
-#     # Create the temporary directory if it doesn't exist
-#     temp_dir = "temp"
-#     if not os.path.exists(temp_dir):
-#         os.makedirs(temp_dir)
+def read_pdf(uploaded_file):
+    # Create the temporary directory if it doesn't exist
+    temp_dir = "temp"
+    if not os.path.exists(temp_dir):
+        os.makedirs(temp_dir)
 
-#     # Save the uploaded file to the temporary location
-#     file_path = os.path.join(temp_dir, uploaded_file.name)
-#     with open(file_path, "wb") as f:
-#         f.write(uploaded_file.getbuffer())
+    # Save the uploaded file to the temporary location
+    file_path = os.path.join(temp_dir, uploaded_file.name)
+    with open(file_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
 
-#     # Read the PDF file
-#     text = ""
-#     with open(file_path, 'rb') as file:
-#         reader = PdfReader(file)
-#         for page in reader.pages:
-#             text += page.extract_text()
+    # Read the PDF file
+    text = ""
+    with open(file_path, 'rb') as file:
+        reader = PdfReader(file)
+        for page in reader.pages:
+            text += page.extract_text()
     
-#     # Remove the temporary file
-#     os.remove(file_path)
+    # Remove the temporary file
+    os.remove(file_path)
 
-#     return text
+    return text
 
 def get_text_chunks(text):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
