@@ -170,11 +170,13 @@ def main():
     if user_question!='Summary' and user_question!='summary':
         user_input(user_question)
 
-
+    
     elif user_question=='Summary' or user_question=='summary':
         with st.spinner("Summarizing text..."):
-            summary = summarize_long_pdf(pdf_text)
-            
+            if count_words_in_pdf(pdf_text) > 3000:
+                summary = summarize_long_pdf(pdf_text)
+            else:
+                summary = summarize_short_pdf(pdf_text)
 
     st.header("Summary:")
     st.write(summary)
