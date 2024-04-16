@@ -78,22 +78,20 @@ def get_conversational_chain():
     return chain
 
 def count_words_in_pdf(uploaded_file):
-    # Open the PDF file
-    pdf_document = fitz.open(uploaded_file)
-
+      
     # Initialize word count
     word_count = 0
 
     # Iterate through each page of the PDF
-    for page_number in range(len(pdf_document)):
+    for page_number in range(len(uploaded_file)):
         # Get the text of the page
-        page_text = pdf_document[page_number].get_text()
+        page_text = uploaded_file[page_number].get_text()
         
         # Split the text into words and update the word count
         word_count += len(page_text.split())
 
     # Close the PDF document
-    pdf_document.close()
+    uploaded_file.close()
 
     return word_count
 
