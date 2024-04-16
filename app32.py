@@ -77,8 +77,9 @@ def get_conversational_chain():
 
     return chain
 
-def count_words_in_pdf(uploaded_file):
-      
+def count_words_in_pdf():
+    # upload the file
+    pdf_docs =  st.file_uploader("Upload a PDF file", type=["pdf"])
     # Initialize word count
     word_count = 0
 
@@ -171,7 +172,7 @@ def main():
     
     elif user_question=='Summary' or user_question=='summary':
         with st.spinner("Summarizing text..."):
-            if count_words_in_pdf(pdf_docs) > 3000:
+            if count_words_in_pdf() > 3000:
                 summary = summarize_long_pdf(pdf_text)
             else:
                 summary = summarize_short_pdf(pdf_text)
