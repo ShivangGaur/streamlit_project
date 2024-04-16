@@ -164,7 +164,8 @@ def main():
                         pdf_text += page_text
                 st.success("Done")
 
-    
+    summary_1 = ""
+    summary_2 = ""
 
     if user_question!='Summary' and user_question!='summary':
         user_input(user_question)
