@@ -77,25 +77,25 @@ def get_conversational_chain():
 
     return chain
 
-# def count_words_in_pdf(uploaded_file):
-#     # Open the PDF file
-#     pdf_document = fitz.open(uploaded_file)
+def count_words_in_pdf(uploaded_file):
+    # Open the PDF file
+    pdf_document = fitz.open(uploaded_file)
 
-#     # Initialize word count
-#     word_count = 0
+    # Initialize word count
+    word_count = 0
 
-#     # Iterate through each page of the PDF
-#     for page_number in range(len(pdf_document)):
-#         # Get the text of the page
-#         page_text = pdf_document[page_number].get_text()
+    # Iterate through each page of the PDF
+    for page_number in range(len(pdf_document)):
+        # Get the text of the page
+        page_text = pdf_document[page_number].get_text()
         
-#         # Split the text into words and update the word count
-#         word_count += len(page_text.split())
+        # Split the text into words and update the word count
+        word_count += len(page_text.split())
 
-#     # Close the PDF document
-#     pdf_document.close()
+    # Close the PDF document
+    pdf_document.close()
 
-#     return word_count
+    return word_count
 
 def summarize_long_pdf(text):
     llm = ChatGoogleGenerativeAI(temperature=0.3, model="gemini-pro")
@@ -111,19 +111,19 @@ def summarize_long_pdf(text):
     summary = chain.run(chunks)
     return summary
 
-# def summarize_short_pdf(text, language):
-#     generic_template = '''
-#     Write a summary of the following pdf_docs:
-#     Speech : `{pdf_docs}`
-#     Translate the precise summary to {language}.
-#     '''
-#     prompt = PromptTemplate(input_variables=['pdf_docs', 'language'], template=generic_template)
-#     complete_prompt = prompt.format(pdf_docs=text, language=language.lower())
+def summarize_short_pdf(text, language):
+    generic_template = '''
+    Write a summary of the following pdf_docs:
+    Speech : `{pdf_docs}`
+    Translate the precise summary to {language}.
+    '''
+    prompt = PromptTemplate(input_variables=['pdf_docs', 'language'], template=generic_template)
+    complete_prompt = prompt.format(pdf_docs=text, language=language.lower())
 
-#     llm = ChatGoogleGenerativeAI(model="gemini-pro")
-#     llm_chain = LLMChain(llm=llm, prompt=prompt)
-#     summary = llm_chain.run({'pdf_docs': text, 'language': language.lower()})
-#     return summary
+    llm = ChatGoogleGenerativeAI(model="gemini-pro")
+    llm_chain = LLMChain(llm=llm, prompt=prompt)
+    summary = llm_chain.run({'pdf_docs': text, 'language': language.lower()})
+    return summary
 
 def user_input(user_question):
     embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
