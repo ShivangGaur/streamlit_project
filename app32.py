@@ -171,12 +171,12 @@ def main():
     elif user_question=='Summary' or user_question=='summary':
         with st.spinner("Summarizing text..."):
             # if count_words_in_pdf() > 3000:
-            summary_1 = summarize_long_pdf(pdf_text)
+            # summary_1 = summarize_long_pdf(pdf_text)
             # else:
             summary_2 = summarize_short_pdf(pdf_text)
 
-    st.header("Summary_long:")
-    st.write(summary_1)
+    # st.header("Summary_long:")
+    # st.write(summary_1)
     st.header("Summary_short:")
     st.write(summary_2)
 
